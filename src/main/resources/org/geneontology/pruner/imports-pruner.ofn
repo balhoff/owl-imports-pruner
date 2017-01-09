@@ -1,0 +1,126 @@
+Prefix(:=<http://geneontology.org/owl-ontology-pruner#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://geneontology.org/owl-ontology-pruner>
+
+Declaration(Class(:LoadedOntology))
+Declaration(Class(:Ontology))
+Declaration(Class(:ReplacedOntology))
+Declaration(ObjectProperty(:imports))
+Declaration(ObjectProperty(:replacedBy))
+Declaration(ObjectProperty(:replacementFor))
+Declaration(ObjectProperty(:shouldImport))
+Declaration(ObjectProperty(:standsInFor))
+Declaration(NamedIndividual(:application))
+Declaration(NamedIndividual(:e))
+Declaration(NamedIndividual(:go))
+Declaration(NamedIndividual(:go-plus))
+Declaration(NamedIndividual(:go-super))
+Declaration(NamedIndividual(:go-uberon-import))
+Declaration(NamedIndividual(:uberon))
+Declaration(NamedIndividual(:uberon-go-import))
+############################
+#   Object Properties
+############################
+
+# Object Property: :imports (:imports)
+
+SubObjectPropertyOf(:imports :shouldImport)
+ObjectPropertyDomain(:imports :Ontology)
+ObjectPropertyRange(:imports :Ontology)
+
+# Object Property: :replacedBy (:replacedBy)
+
+InverseObjectProperties(:replacedBy :replacementFor)
+ObjectPropertyDomain(:replacedBy :Ontology)
+ObjectPropertyRange(:replacedBy :Ontology)
+
+# Object Property: :replacementFor (:replacementFor)
+
+ObjectPropertyDomain(:replacementFor :Ontology)
+ObjectPropertyRange(:replacementFor :Ontology)
+
+# Object Property: :shouldImport (:shouldImport)
+
+ObjectPropertyDomain(:shouldImport :Ontology)
+ObjectPropertyRange(:shouldImport :Ontology)
+
+# Object Property: :standsInFor (:standsInFor)
+
+ObjectPropertyDomain(:standsInFor :Ontology)
+ObjectPropertyRange(:standsInFor :Ontology)
+
+
+############################
+#   Classes
+############################
+
+# Class: :LoadedOntology (:LoadedOntology)
+
+SubClassOf(:LoadedOntology :Ontology)
+
+# Class: :ReplacedOntology (:ReplacedOntology)
+
+EquivalentClasses(:ReplacedOntology ObjectUnionOf(ObjectIntersectionOf(:Ontology ObjectSomeValuesFrom(:replacedBy :LoadedOntology)) ObjectIntersectionOf(:Ontology ObjectSomeValuesFrom(:standsInFor ObjectUnionOf(:LoadedOntology :ReplacedOntology)))))
+SubClassOf(:ReplacedOntology :Ontology)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: :application (:application)
+
+ClassAssertion(:LoadedOntology :application)
+ClassAssertion(:Ontology :application)
+ObjectPropertyAssertion(:imports :application :go-plus)
+ObjectPropertyAssertion(:imports :application :uberon)
+
+# Individual: :e (:e)
+
+ClassAssertion(:Ontology :e)
+
+# Individual: :go (:go)
+
+ClassAssertion(:Ontology :go)
+ObjectPropertyAssertion(:imports :go :go-uberon-import)
+
+# Individual: :go-plus (:go-plus)
+
+ClassAssertion(:LoadedOntology :go-plus)
+ClassAssertion(:Ontology :go-plus)
+ObjectPropertyAssertion(:imports :go-plus :go-uberon-import)
+ObjectPropertyAssertion(:replacementFor :go-plus :go)
+
+# Individual: :go-super (:go-super)
+
+ClassAssertion(:Ontology :go-super)
+ObjectPropertyAssertion(:imports :go-super :go-uberon-import)
+ObjectPropertyAssertion(:replacementFor :go-super :go-plus)
+
+# Individual: :go-uberon-import (:go-uberon-import)
+
+ClassAssertion(:LoadedOntology :go-uberon-import)
+ObjectPropertyAssertion(:standsInFor :go-uberon-import :uberon)
+
+# Individual: :uberon (:uberon)
+
+ClassAssertion(:LoadedOntology :uberon)
+ClassAssertion(:Ontology :uberon)
+ObjectPropertyAssertion(:imports :uberon :uberon-go-import)
+
+# Individual: :uberon-go-import (:uberon-go-import)
+
+ClassAssertion(:LoadedOntology :uberon-go-import)
+ClassAssertion(:Ontology :uberon-go-import)
+ObjectPropertyAssertion(:standsInFor :uberon-go-import :go)
+
+
+SubObjectPropertyOf(ObjectPropertyChain(:imports :standsInFor) :shouldImport)
+SubObjectPropertyOf(ObjectPropertyChain(:shouldImport :replacedBy) :shouldImport)
+)
