@@ -16,14 +16,6 @@ Declaration(ObjectProperty(:replacedBy))
 Declaration(ObjectProperty(:replacementFor))
 Declaration(ObjectProperty(:shouldImport))
 Declaration(ObjectProperty(:standsInFor))
-Declaration(NamedIndividual(:application))
-Declaration(NamedIndividual(:e))
-Declaration(NamedIndividual(:go))
-Declaration(NamedIndividual(:go-plus))
-Declaration(NamedIndividual(:go-super))
-Declaration(NamedIndividual(:go-uberon-import))
-Declaration(NamedIndividual(:uberon))
-Declaration(NamedIndividual(:uberon-go-import))
 ############################
 #   Object Properties
 ############################
@@ -68,57 +60,6 @@ SubClassOf(:LoadedOntology :Ontology)
 
 EquivalentClasses(:ReplacedOntology ObjectUnionOf(ObjectIntersectionOf(:Ontology ObjectSomeValuesFrom(:replacedBy :LoadedOntology)) ObjectIntersectionOf(:Ontology ObjectSomeValuesFrom(:standsInFor ObjectUnionOf(:LoadedOntology :ReplacedOntology)))))
 SubClassOf(:ReplacedOntology :Ontology)
-
-
-############################
-#   Named Individuals
-############################
-
-# Individual: :application (:application)
-
-ClassAssertion(:LoadedOntology :application)
-ClassAssertion(:Ontology :application)
-ObjectPropertyAssertion(:imports :application :go-plus)
-ObjectPropertyAssertion(:imports :application :uberon)
-
-# Individual: :e (:e)
-
-ClassAssertion(:Ontology :e)
-
-# Individual: :go (:go)
-
-ClassAssertion(:Ontology :go)
-ObjectPropertyAssertion(:imports :go :go-uberon-import)
-
-# Individual: :go-plus (:go-plus)
-
-ClassAssertion(:LoadedOntology :go-plus)
-ClassAssertion(:Ontology :go-plus)
-ObjectPropertyAssertion(:imports :go-plus :go-uberon-import)
-ObjectPropertyAssertion(:replacementFor :go-plus :go)
-
-# Individual: :go-super (:go-super)
-
-ClassAssertion(:Ontology :go-super)
-ObjectPropertyAssertion(:imports :go-super :go-uberon-import)
-ObjectPropertyAssertion(:replacementFor :go-super :go-plus)
-
-# Individual: :go-uberon-import (:go-uberon-import)
-
-ClassAssertion(:LoadedOntology :go-uberon-import)
-ObjectPropertyAssertion(:standsInFor :go-uberon-import :uberon)
-
-# Individual: :uberon (:uberon)
-
-ClassAssertion(:LoadedOntology :uberon)
-ClassAssertion(:Ontology :uberon)
-ObjectPropertyAssertion(:imports :uberon :uberon-go-import)
-
-# Individual: :uberon-go-import (:uberon-go-import)
-
-ClassAssertion(:LoadedOntology :uberon-go-import)
-ClassAssertion(:Ontology :uberon-go-import)
-ObjectPropertyAssertion(:standsInFor :uberon-go-import :go)
 
 
 SubObjectPropertyOf(ObjectPropertyChain(:imports :standsInFor) :shouldImport)
