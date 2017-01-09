@@ -31,7 +31,15 @@ public class OWLImportsPruner {
 	private OWLDataFactory factory = OWLManager.getOWLDataFactory();
 	public static OWLObjectProperty imports = OWLManager.getOWLDataFactory().getOWLObjectProperty(IRI.create("http://geneontology.org/owl-ontology-pruner#imports"));
 	public static OWLObjectProperty shouldImport = OWLManager.getOWLDataFactory().getOWLObjectProperty(IRI.create("http://geneontology.org/owl-ontology-pruner#shouldImport"));
+	/**
+	 * Property relating a "stand-in" version of an ontology to the "full" version. 
+	 * E.g. <http://purl.obolibrary.org/obo/go/extensions/pato_import.owl> standsInFor <http://purl.obolibrary.org/obo/pato.owl>
+	 */
 	public static IRI standsInFor = IRI.create("http://geneontology.org/owl-ontology-pruner#standsInFor");
+	/**
+	 * Property relating a richer version of an ontology to the standard version. 
+	 * E.g. <http://purl.obolibrary.org/obo/go/extensions/go-plus.owl> replacementFor <http://purl.obolibrary.org/obo/go.owl>
+	 */
 	public static IRI replacementFor = IRI.create("http://geneontology.org/owl-ontology-pruner#replacementFor");
 	public static OWLClass loadedOntology = OWLManager.getOWLDataFactory().getOWLClass(IRI.create("http://geneontology.org/owl-ontology-pruner#LoadedOntology"));
 	public static OWLClass replacedOntology = OWLManager.getOWLDataFactory().getOWLClass(IRI.create("http://geneontology.org/owl-ontology-pruner#ReplacedOntology"));
